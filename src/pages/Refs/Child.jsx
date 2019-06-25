@@ -1,18 +1,21 @@
-import React, { useRef } from 'react'
+import React, { useRef, useImperativeHandle, forwardRef } from 'react'
+import { Form } from 'antd'
 
-const Child = () => {
-  const test = () => {
-    console.log('test')
-  }
+import Grandson from './Grandson'
+
+const ChildInput = (props, ref) => {
   const inputRef = useRef();
   useImperativeHandle(ref, () => ({
     focus: () => {
-      inputRef.current.focus();
+      // inputRef.current.focus();
+      console.log('focus')
     }
   }))
   return (
-    <div>Child</div>
+    <Form ref={inputRef}>
+      <input type="text"/>
+    </Form>
   )
 }
-
+const Child = forwardRef(ChildInput)
 export default Child
